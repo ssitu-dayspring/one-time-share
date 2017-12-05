@@ -12,6 +12,7 @@ import { ShareFormComponent } from './share-form.component';
 import { ConfirmationComponent } from './confirmation.component';
 import { ShareFormService } from '../../services/share-form.service';
 
+import { SharePagesRoutingModule } from './share-pages-routing.module';
 import { environment } from '../../environments/firebase.environment';
 
 
@@ -22,7 +23,8 @@ import { environment } from '../../environments/firebase.environment';
         AngularFireModule.initializeApp(environment.firebase),
         AngularFirestoreModule,
         AngularFireDatabaseModule,
-        AngularFireAuthModule
+        AngularFireAuthModule,
+        SharePagesRoutingModule
     ],
     exports: [
         ShareFormComponent

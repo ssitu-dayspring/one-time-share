@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
@@ -17,6 +18,7 @@ export class ShareFormComponent
     items: Observable<any[]>;
 
     constructor(
+        private router: Router,
         private shareFormSvc: ShareFormService,
         private db: AngularFirestore
     ) {}
@@ -32,5 +34,7 @@ export class ShareFormComponent
 
     onSubmit() {
         this.shareFormSvc.submit();
+
+        this.router.navigateByUrl('/confirmation');
     }
 }

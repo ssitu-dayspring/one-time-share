@@ -11,13 +11,13 @@ import { AddressComponent } from './address.component';
 
 import { CounterInputComponent } from './counter-input.component';
 
-import { MainPagesRoutingModule } from './main-pages-routing.module';
+//import { MainPagesRoutingModule } from './main-pages-routing.module';
 
 @NgModule({
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    MainPagesRoutingModule
+    //MainPagesRoutingModule
   ],
   declarations: [
     ShareComponent,

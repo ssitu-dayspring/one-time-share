@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { ShareFormService } from '../../services/share-form.service';
+
 @Component({
     selector: 'confirmation',
     template: require('./confirmation.component.html')
@@ -7,5 +9,9 @@ import { Component } from '@angular/core';
 
 export class ConfirmationComponent
 {
-    constructor() {}
+    constructor(private shareFormSvc: ShareFormService) {}
+
+    onBackToForm() {
+        this.shareFormSvc.reset();
+    }
 }

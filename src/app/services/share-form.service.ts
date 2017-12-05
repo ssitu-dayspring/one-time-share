@@ -41,4 +41,12 @@ export class ShareFormService
 
         console.log('Submitted');
     }
+
+    reset() {
+        this.mainForm.reset({
+            senderEmail: '',
+            content: '',
+            receiverEmail: ''
+        })
+    }
 }

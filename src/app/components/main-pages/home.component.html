@@ -48,6 +48,8 @@
       </div>
     </div>
     <button type="submit" class="btn btn-primary" [disabled]="user.invalid">Sign up</button>
+
+    <button type="button" class="btn btn-default" (click)="sendEmail()">Send Email</button>
   <!-- {{ user.value | json }} -->
   </form>
 </div>

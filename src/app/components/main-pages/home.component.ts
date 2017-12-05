@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Logger } from 'angular2-logger/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import { EmailjsService } from '../../services/emailjs.service';
 
 import { emailMatcher } from '../../form-validators/email-matcher';
 import * as fromRoot from '../../store';
@@ -32,7 +33,9 @@ export class HomeComponent implements OnInit {
   constructor(
     private store: Store<fromRoot.State>,
     private fb: FormBuilder,
-    private $log: Logger) {
+    private $log: Logger,
+    private emailjsSvc: EmailjsService
+  ) {
     this.pageState$ = store.select(fromRoot.getMainPageState);
 
     this.pageState$.subscribe((state) => {
@@ -80,6 +83,15 @@ export class HomeComponent implements OnInit {
 
   onSubmit() {
     console.log(this.user.value, this.user.valid);
+  }
+
+  sendEmail() {
+    this.emailjsSvc.send(
+      'dev.one.time.share.gmail.com',
+      'stsitu26@gmail.com'
+    );
+
+    console.log('Clicked');
   }
 }
 

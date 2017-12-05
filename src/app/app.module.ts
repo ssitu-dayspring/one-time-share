@@ -13,6 +13,8 @@ import { MainPagesModule } from './components/main-pages/main-pages.module';
 import { AppComponent } from './components/app.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
+import { EmailjsService } from './services/emailjs.service';
+
 import { reducer } from './store';
 
 @NgModule({
@@ -29,6 +31,9 @@ import { reducer } from './store';
     NavBarComponent
   ],
   bootstrap: [AppComponent],
-  providers: [LOG_LOGGER_PROVIDERS]
+  providers: [
+    LOG_LOGGER_PROVIDERS,
+    EmailjsService
+  ]
 })
 export class AppModule { }

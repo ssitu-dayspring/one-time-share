@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Share } from '../model/share';
+import { FirebaseManagerService } from './firebase-manager.service';
 
 
 @Injectable()
@@ -12,12 +12,12 @@ export class ShareFormService
 
     constructor(
         private fb: FormBuilder,
-        private db: AngularFirestore
+        private firebaseSvc: FirebaseManagerService
     ) {
         this.mainForm = this.fb.group({
-            senderEmail: [],
-            content: [],
-            receiverEmail: []
+            senderEmail:   ['', Validators.required],
+            content:       ['', Validators.required],
+            receiverEmail: ['', Validators.required]
         });
     }
 
@@ -37,8 +37,7 @@ export class ShareFormService
             is_active: true
         };
 
-        this.db.collection('share').add(share);
-
+        this.firebaseSvc.save(share);
         console.log('Submitted');
     }
 

@@ -10,7 +10,10 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 import { ShareFormComponent } from './share-form.component';
 import { ConfirmationComponent } from './confirmation.component';
+import { ViewShareComponent } from './view-share.component';
+
 import { ShareFormService } from '../../services/share-form.service';
+import { FirebaseManagerService } from '../../services/firebase-manager.service';
 
 import { SharePagesRoutingModule } from './share-pages-routing.module';
 import { environment } from '../../environments/firebase.environment';
@@ -31,12 +34,14 @@ import { environment } from '../../environments/firebase.environment';
     ],
     declarations: [
         ShareFormComponent,
-        ConfirmationComponent
+        ConfirmationComponent,
+        ViewShareComponent
     ],
     bootstrap: [ShareFormComponent],
     providers: [
         LOG_LOGGER_PROVIDERS,
-        ShareFormService
+        ShareFormService,
+        FirebaseManagerService
     ]
 })
 export class SharePagesModule { }

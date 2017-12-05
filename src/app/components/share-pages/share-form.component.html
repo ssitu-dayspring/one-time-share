@@ -2,25 +2,36 @@
 
 <form novalidate (ngSubmit)="onSubmit()" [formGroup]="mainForm">
     <div class="form-group">
-        <label class="form-control-label">Sender Email</label>
+        <label class="form-control-label"><strong>Sender Email</strong></label>
         <input class="form-control"
                type="text"
                formControlName="senderEmail">
+        <div class="form-control-feedback" ng-if="hasError('senderEmail', 'required')">
+            Sender Email required
+        </div>
     </div>
 
     <div class="form-group">
-        <label class="form-control-label">Content</label>
+        <label class="form-control-label"><strong>Content</strong></label>
         <textarea class="form-control"
                   type="text"
                   formControlName="content"></textarea>
+        <div class="form-control-feedback" ng-if="hasError('content', 'required')">
+            Content required
+        </div>
     </div>
 
     <div class="form-group">
-        <label class="form-control-label">Receiver Email</label>
+        <label class="form-control-label"><strong>Receiver Email</strong></label>
         <input class="form-control"
                type="text"
                formControlName="receiverEmail">
+        <div class="form-control-feedback" ng-if="hasError('receiverEmail', 'required')">
+            Receiver Email field required
+        </div>
     </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit"
+            class="btn btn-primary"
+            [disabled]="false">Submit</button>
 </form>

@@ -1,0 +1,26 @@
+<div class="jumbotron">
+    <form novalidate (ngSubmit)="onSubmit()" [formGroup]="mainForm">
+        <div class="form-group">
+            <label class="form-control-label">Sender Email</label>
+            <input class="form-control"
+                   type="text"
+                   formControlName="senderEmail">
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label">Content</label>
+            <textarea class="form-control"
+                      type="text"
+                      formControlName="content"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label">Receiver Email</label>
+            <input class="form-control"
+                   type="text"
+                   formControlName="receiverEmail">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

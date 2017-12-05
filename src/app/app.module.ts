@@ -9,11 +9,10 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { AppRoutingModule } from './app-routing.module';
 import { MainPagesModule } from './components/main-pages/main-pages.module';
+import { SharePagesModule } from './components/share-pages/share-pages.module';
 
 import { AppComponent } from './components/app.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
-
-import { EmailjsService } from './services/emailjs.service';
 
 import { reducer } from './store';
 
@@ -22,6 +21,7 @@ import { reducer } from './store';
     BrowserModule,
     AppRoutingModule,
     MainPagesModule,
+    SharePagesModule,
     StoreModule.provideStore(reducer),
     RouterStoreModule.connectRouter(),
     StoreDevtoolsModule.instrumentOnlyWithExtension()
@@ -32,8 +32,7 @@ import { reducer } from './store';
   ],
   bootstrap: [AppComponent],
   providers: [
-    LOG_LOGGER_PROVIDERS,
-    EmailjsService
+    LOG_LOGGER_PROVIDERS
   ]
 })
 export class AppModule { }

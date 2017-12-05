@@ -3,6 +3,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { LOG_LOGGER_PROVIDERS } from 'angular2-logger/core';
 
+import { ShareComponent } from './share.component';
 import { HomeComponent } from './home.component';
 import { AboutComponent } from './about.component';
 import { ContactComponent } from './contact.component';
@@ -19,6 +20,7 @@ import { MainPagesRoutingModule } from './main-pages-routing.module';
     MainPagesRoutingModule
   ],
   declarations: [
+    ShareComponent,
     HomeComponent,
     AboutComponent,
     ContactComponent,

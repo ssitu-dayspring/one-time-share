@@ -33,8 +33,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private store: Store<fromRoot.State>,
     private fb: FormBuilder,
-    private $log: Logger,
-    private emailjsSvc: EmailjsService
+    private $log: Logger
   ) {
     this.pageState$ = store.select(fromRoot.getMainPageState);
 
@@ -86,10 +85,10 @@ export class HomeComponent implements OnInit {
   }
 
   sendEmail() {
-    this.emailjsSvc.send(
-      'dev.one.time.share.gmail.com',
-      'stsitu26@gmail.com'
-    );
+    //this.emailjsSvc.send(
+    //  'dev.one.time.share.gmail.com',
+    //  'stsitu26@gmail.com'
+    //);
 
     console.log('Clicked');
   }

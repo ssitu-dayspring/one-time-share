@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Share } from '../model/share';
 import { FirebaseManagerService } from './firebase-manager.service';
 
+//var email = require('../../emailjs/email.js');
 
 @Injectable()
 export class ShareFormService
@@ -37,8 +38,32 @@ export class ShareFormService
             is_active: true
         };
 
+        this.sendEmail(formData);
+
         this.firebaseSvc.save(share);
         console.log('Submitted');
+    }
+
+    sendEmail(formData: any) {
+        //let server = email.server.connect({
+        //    user:     'dev.one.time.share@gmail.com',
+        //    password: 'devpass2017',
+        //    host:     'smtp.gmail.com',
+        //    ssl:      true
+        //});
+        //
+        console.debug('debug');
+        console.info('info');
+        console.log('log');
+        console.warn('warn');
+        console.error('error');
+        console.warn({
+            text: 'This is a message.',
+            from: 'dev.one.time.share@gmail.com',
+            to: formData.receiverEmail,
+            cc: '',
+            subject: 'Share'
+        });
     }
 
     reset() {

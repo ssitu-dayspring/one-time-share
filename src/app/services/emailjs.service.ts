@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+//var emailjs = require('../../emailjs/email.js');
 var emailjs = require('emailjs/email.js');
 
 @Injectable()

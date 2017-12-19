@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "one-time-share"
+    "default": "one-time-share",
+    "dev": "one-time-share"
   }
 }

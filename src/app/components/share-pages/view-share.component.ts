@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
 import { AngularFirestore } from 'angularfire2/firestore';
 
 import { FirebaseManagerService } from '../../services/firebase-manager.service';

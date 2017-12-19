@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import * as moment from 'moment';
 
 import { Share } from '../model/share';
 import { FirebaseManagerService } from './firebase-manager.service';
@@ -31,10 +32,8 @@ export class ShareFormService
         let share: Share = {
             sender_email: formData.senderEmail,
             receiver_email: formData.receiverEmail,
-            share_content: {
-                content: formData.content
-            },
-            date_created: '',
+            content: formData.content,
+            date_created: moment().format('YYYY-MM-DD HH:mm:ss'),
             is_active: true
         };
 
@@ -45,25 +44,6 @@ export class ShareFormService
     }
 
     sendEmail(formData: any) {
-        //let server = email.server.connect({
-        //    user:     'dev.one.time.share@gmail.com',
-        //    password: 'devpass2017',
-        //    host:     'smtp.gmail.com',
-        //    ssl:      true
-        //});
-        //
-        console.debug('debug');
-        console.info('info');
-        console.log('log');
-        console.warn('warn');
-        console.error('error');
-        console.warn({
-            text: 'This is a message.',
-            from: 'dev.one.time.share@gmail.com',
-            to: formData.receiverEmail,
-            cc: '',
-            subject: 'Share'
-        });
     }
 
     reset() {

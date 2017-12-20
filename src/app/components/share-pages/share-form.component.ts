@@ -30,10 +30,6 @@ export class ShareFormComponent
         this.mainForm = this.shareFormSvc.getMainForm();
         this.items = this.db.collection('share').valueChanges();
 
-        this.items.subscribe((data: any) => {
-            console.log('Data: ', data);
-        });
-
         this.validationsAll = {
             senderEmail: [
                 { type: 'required', msg: 'Sender Email field required' },

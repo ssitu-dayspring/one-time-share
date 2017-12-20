@@ -4,5 +4,6 @@ export interface Share
     receiver_email: string;
     content: string;
     date_created: string;
+    date_modified: string;
     is_active: boolean;
 }

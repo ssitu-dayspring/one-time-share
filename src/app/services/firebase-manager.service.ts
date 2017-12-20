@@ -28,4 +28,8 @@ export class FirebaseManagerService
             return ref.where('is_active', '==', true);
         }).doc(uid).ref.get();
     }
+
+    updateShare(uid: string, data: any) {
+        this.getShareColl().doc(uid).update(data);
+    }
 }

@@ -31,7 +31,7 @@ exports.sendCreateEmail = functions.firestore
         mailOptions['text'] = `
             ${senderEmail} has content to share with you.
 
-            Click 'http://localhost:3000/#/view_share/${uid}' to view.
+            Click http://localhost:3000/#/view_share/${uid} to view.
 
             Please Note. This content will expire in 48 hours. Afterwards, the content will no longer be viewable.
         `;

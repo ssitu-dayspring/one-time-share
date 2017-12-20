@@ -35,13 +35,14 @@ export class ShareFormService
             receiver_email: formData.receiverEmail,
             content: formData.content,
             date_created: moment().format('YYYY-MM-DD HH:mm:ss'),
+            date_modified: null,
             is_active: true
         };
 
         this.validate(this.mainForm);
 
         if (this.mainForm.valid) {
-            //this.firebaseSvc.save(share);
+            this.firebaseSvc.save(share);
             console.info('Submitted');
         } else {
             console.warn('Form has errors');

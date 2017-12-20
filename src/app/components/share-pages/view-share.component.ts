@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFirestore } from 'angularfire2/firestore';
 
 import { FirebaseManagerService } from '../../services/firebase-manager.service';
@@ -18,7 +18,8 @@ export class ViewShareComponent
     share: Share;
 
     constructor(
-        private router: ActivatedRoute,
+        private activatedRouter: ActivatedRoute,
+        private router: Router,
         private firebaseSvc: FirebaseManagerService
     ) {
         this.uid = undefined;
@@ -26,13 +27,17 @@ export class ViewShareComponent
     }
 
     ngOnInit() {
-        this.router.params.subscribe(params => {
+        this.activatedRouter.params.subscribe(params => {
             this.uid = params['id'];
 
             this.firebaseSvc.getShareById(this.uid).then((doc) => {
                 this.share = (doc.exists)
                     ? doc.data()
                     : null;
+
+                if (!this.share || this.share.content.length === 0 || !this.share.is_active) {
+                    this.router.navigateByUrl('expired');
+                }
             });
         });
     }

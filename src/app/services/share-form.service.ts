@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, FormControl, AbstractControl, Validators } from '@angular/forms';
 import * as moment from 'moment';
 
 import { Share } from '../model/share';
@@ -37,13 +37,41 @@ export class ShareFormService
             is_active: true
         };
 
-        this.sendEmail(formData);
+        this.validate(this.mainForm);
 
-        this.firebaseSvc.save(share);
-        console.log('Submitted');
+        if (this.mainForm.valid) {
+            //this.firebaseSvc.save(share);
+            console.info('Submitted');
+        } else {
+            console.warn('Form has errors');
+        }
     }
 
-    sendEmail(formData: any) {
+    validate(formGroup: (FormGroup | FormArray)) {
+        Object.keys(formGroup.controls).forEach((field) => {
+            let control: AbstractControl = formGroup.get(field);
+
+            if (control instanceof FormControl) {
+                control.markAsDirty({onlySelf: true});
+            } else if (control instanceof FormGroup || control instanceof FormArray) {
+                this.validate(<FormGroup> control);
+            }
+        });
+    }
+
+    hasError(name: string, error?: string) : boolean {
+        if (!this.mainForm) return false;
+
+        let tree = name.split('.');
+        let o: any = this.mainForm;
+
+        tree.forEach(key => {
+            o = o.get(key);
+        });
+
+        return (error)
+            ? o.hasError(error) && !o.pristine
+            : o.errors && !o.pristine;
     }
 
     reset() {

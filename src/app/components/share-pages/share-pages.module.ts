@@ -11,6 +11,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { ShareFormComponent } from './share-form.component';
 import { ConfirmationComponent } from './confirmation.component';
 import { ViewShareComponent } from './view-share.component';
+import { FormRowComponent } from '../../shared/form-row.component';
 
 import { ShareFormService } from '../../services/share-form.service';
 import { FirebaseManagerService } from '../../services/firebase-manager.service';
@@ -35,7 +36,8 @@ import { environment } from '../../environments/firebase.environment';
     declarations: [
         ShareFormComponent,
         ConfirmationComponent,
-        ViewShareComponent
+        ViewShareComponent,
+        FormRowComponent
     ],
     bootstrap: [ShareFormComponent],
     providers: [

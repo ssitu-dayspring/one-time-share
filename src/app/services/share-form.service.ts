@@ -3,9 +3,10 @@ import { FormBuilder, FormGroup, FormArray, FormControl, AbstractControl, Valida
 import * as moment from 'moment';
 
 import { Share } from '../model/share';
+
 import { FirebaseManagerService } from './firebase-manager.service';
 
-//var email = require('../../emailjs/email.js');
+import { isaRfcEmail } from '../form-validators/index';
 
 @Injectable()
 export class ShareFormService
@@ -17,9 +18,9 @@ export class ShareFormService
         private firebaseSvc: FirebaseManagerService
     ) {
         this.mainForm = this.fb.group({
-            senderEmail:   ['', Validators.required],
+            senderEmail:   ['', [Validators.required, isaRfcEmail]],
             content:       ['', Validators.required],
-            receiverEmail: ['', Validators.required]
+            receiverEmail: ['', [Validators.required, isaRfcEmail]]
         });
     }
 

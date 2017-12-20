@@ -36,22 +36,15 @@ export class ShareFormComponent
 
         this.validationsAll = {
             senderEmail: [
-                {
-                    type: 'required',
-                    msg: 'Sender Email field required'
-                }
+                { type: 'required', msg: 'Sender Email field required' },
+                { type: 'isaRfcEmail', msg: 'Invalid email' },
             ],
             content: [
-                {
-                    type: 'required',
-                    msg: 'Content field required'
-                }
+                { type: 'required', msg: 'Content field required' }
             ],
             receiverEmail: [
-                {
-                    type: 'required',
-                    msg: 'Receiver Email field required'
-                }
+                { type: 'required', msg: 'Receiver Email field required' },
+                { type: 'isaRfcEmail', msg: 'Invalid email' }
             ]
         }
     }

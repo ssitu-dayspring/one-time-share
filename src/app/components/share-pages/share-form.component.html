@@ -1,6 +1,6 @@
 <h2>Share Form</h2>
 
-<form novalidate (ngSubmit)="onSubmit()" [formGroup]="mainForm">
+<form novalidate (ngSubmit)="onSubmit()" [formGroup]="form">
     <div class="form-group">
         <form-row [validations]="validationsAll?.senderEmail" [formCtrlName]="'senderEmail'">
             <label class="form-control-label" form-section="label"><strong>Sender Email</strong></label>

@@ -12,10 +12,11 @@ import { ShareFormComponent } from './share-form.component';
 import { ConfirmationComponent } from './confirmation.component';
 import { ViewShareComponent } from './view-share.component';
 import { ExpiredComponent } from './expired.component';
-import { FormRowComponent } from '../../shared/form-row.component';
+import { FormRowComponent } from '../../shared/components/form-row.component';
 
-import { ShareFormService } from '../../services/share-form.service';
-import { FirebaseManagerService } from '../../services/firebase-manager.service';
+import { FirestoreService } from '../../shared/services/firestore.service';
+import { ShareService } from '../../services/share.service';
+import { ShareFormService } from '../../services/share.form';
 
 import { SharePagesRoutingModule } from './share-pages-routing.module';
 import { environment } from '../../environments/firebase.environment';
@@ -44,8 +45,9 @@ import { environment } from '../../environments/firebase.environment';
     bootstrap: [ShareFormComponent],
     providers: [
         LOG_LOGGER_PROVIDERS,
-        ShareFormService,
-        FirebaseManagerService
+        FirestoreService,
+        ShareService,
+        ShareFormService
     ]
 })
 export class SharePagesModule { }

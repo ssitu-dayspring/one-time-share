@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Logger } from 'angular2-logger/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { EmailjsService } from '../../services/emailjs.service';
 
 import { emailMatcher } from '../../form-validators/email-matcher';
 import * as fromRoot from '../../store';

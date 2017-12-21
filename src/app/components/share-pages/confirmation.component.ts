@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ShareFormService } from '../../services/share-form.service';
+import { ShareFormService } from '../../services/share.form';
 
 @Component({
     selector: 'confirmation',

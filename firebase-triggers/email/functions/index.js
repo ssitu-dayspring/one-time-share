@@ -1,7 +1,6 @@
-const functions     = require('firebase-functions');
-const nodemailer    = require('nodemailer');
-const Email         = require('email-templates');
-const hbs           = require('handlebars');
+const functions  = require('firebase-functions');
+const nodemailer = require('nodemailer');
+const Email      = require('email-templates');
 
 const gmailEmail    = functions.config().gmail.email;
 const gmailPassword = functions.config().gmail.password;
@@ -16,12 +15,12 @@ const mailTransport = nodemailer.createTransport({
 const APP_NAME = '[DEV] One Time Share';
 
 exports.sendCreateEmail = functions.firestore
-    .document('share/{uid}')
+    .document('share/{docId}')
     .onCreate((event) => {
         const noreply = `${APP_NAME} <noreply@one.time.share.com>`;
         const document = event.data.data();
         const locals = {
-            uid: event.params.uid,
+            docId: event.params.docId,
             senderEmail: document['sender_email'],
             receiverEmail: document['receiver_email']
         };

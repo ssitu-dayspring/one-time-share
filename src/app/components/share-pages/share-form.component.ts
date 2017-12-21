@@ -4,8 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 
-import { ShareFormService } from "../../services/share-form.service";
-
+import { ShareFormService } from '../../services/share.form';
 
 @Component({
     selector: 'share-form',
@@ -15,20 +14,17 @@ import { ShareFormService } from "../../services/share-form.service";
 
 export class ShareFormComponent
 {
-    mainForm: FormGroup;
-    items: Observable<any[]>;
+    form: FormGroup;
 
     validationsAll: any = {};
 
     constructor(
         private router: Router,
-        private shareFormSvc: ShareFormService,
-        private db: AngularFirestore
+        private shareFormSvc: ShareFormService
     ) {}
 
     ngOnInit() {
-        this.mainForm = this.shareFormSvc.getMainForm();
-        this.items = this.db.collection('share').valueChanges();
+        this.form = this.shareFormSvc.getForm();
 
         this.validationsAll = {
             senderEmail: [
@@ -52,7 +48,7 @@ export class ShareFormComponent
     onSubmit() {
         this.shareFormSvc.submit();
 
-        if (this.mainForm.valid) {
+        if (this.form.valid) {
             this.router.navigateByUrl('/confirmation');
         }
     }

@@ -1,52 +1,70 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, AbstractControl, Validators } from '@angular/forms';
-import * as moment from 'moment';
+
+import * as firebase from 'firebase/app';
 
 import { Share } from '../model/share';
 
-import { FirebaseManagerService } from './firebase-manager.service';
+import { ShareService } from './share.service';
+import { serverTimestamp } from '../shared/services/firestore.service';
 
 import { isaRfcEmail } from '../form-validators/index';
+
 
 @Injectable()
 export class ShareFormService
 {
-    mainForm: FormGroup;
+    private form: FormGroup;
 
     constructor(
         private fb: FormBuilder,
-        private firebaseSvc: FirebaseManagerService
+        private shareSvc: ShareService
     ) {
-        this.mainForm = this.fb.group({
+        this.initForm();
+    }
+
+    private initForm() {
+        this.form = this.fb.group({
             senderEmail:   ['', [Validators.required, isaRfcEmail]],
             content:       ['', Validators.required],
             receiverEmail: ['', [Validators.required, isaRfcEmail]]
         });
     }
 
-    getMainForm() : FormGroup {
-        return this.mainForm;
+    /**
+     * Get the entire form
+     */
+    getForm() : FormGroup {
+        return this.form;
     }
 
     submit() {
-        let formData = this.mainForm.getRawValue();
+        let formData = this.form.getRawValue();
         let share: Share = {
             sender_email: formData.senderEmail,
             receiver_email: formData.receiverEmail,
             content: formData.content,
-            date_created: moment().format('YYYY-MM-DD HH:mm:ss'),
+            date_created: serverTimestamp,
             date_modified: null,
             is_active: true
         };
 
-        this.validate(this.mainForm);
+        this.validate(this.form);
 
-        if (this.mainForm.valid) {
-            this.firebaseSvc.save(share);
+        if (this.form.valid) {
+            this.shareSvc.createShare(share);
             console.info('Submitted');
         } else {
             console.warn('Form has errors');
         }
+    }
+
+    reset() {
+        this.form.reset({
+            senderEmail: '',
+            content: '',
+            receiverEmail: ''
+        })
     }
 
     validate(formGroup: (FormGroup | FormArray)) {
@@ -62,10 +80,10 @@ export class ShareFormService
     }
 
     hasError(name: string, error?: string) : boolean {
-        if (!this.mainForm) return false;
+        if (!this.form) return false;
 
         let tree = name.split('.');
-        let o: any = this.mainForm;
+        let o: any = this.form;
 
         tree.forEach(key => {
             o = o.get(key);
@@ -74,13 +92,5 @@ export class ShareFormService
         return (error)
             ? o.hasError(error) && !o.pristine
             : o.errors && !o.pristine;
-    }
-
-    reset() {
-        this.mainForm.reset({
-            senderEmail: '',
-            content: '',
-            receiverEmail: ''
-        })
     }
 }

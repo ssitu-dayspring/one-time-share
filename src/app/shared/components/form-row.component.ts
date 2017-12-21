@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { ShareFormService } from '../services/share-form.service';
+import { ShareFormService } from '../../services/share.form';
 
 export interface Validation {
     type: string
@@ -31,10 +31,6 @@ export class FormRowComponent
     constructor(private shareFormSvc: ShareFormService) {
         this.validations = [];
         this.formCtrlName = '';
-    }
-
-    ngOnChanges() {
-        console.log(this.validations);
     }
 
     hasError(name: string, error?: string) : boolean {

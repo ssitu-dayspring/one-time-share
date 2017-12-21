@@ -1,5 +1,7 @@
-const functions = require('firebase-functions');
-const nodemailer = require('nodemailer');
+const functions     = require('firebase-functions');
+const nodemailer    = require('nodemailer');
+const Email         = require('email-templates');
+const hbs           = require('handlebars');
 
 const gmailEmail    = functions.config().gmail.email;
 const gmailPassword = functions.config().gmail.password;
@@ -11,38 +13,44 @@ const mailTransport = nodemailer.createTransport({
     }
 });
 
-const APP_NAME = 'One Time Share';
+const APP_NAME = '[DEV] One Time Share';
 
 exports.sendCreateEmail = functions.firestore
     .document('share/{uid}')
-    .onCreate(function(event) {
-        const document = event.data.data();
-        const senderEmail = document['sender_email'];
-        const receiverEmail = document['receiver_email'];
-        const uid = event.params.uid;
-
+    .onCreate((event) => {
         const noreply = `${APP_NAME} <noreply@one.time.share.com>`;
-        const mailOptions = {
-            from: noreply,
-            to: receiverEmail
+        const document = event.data.data();
+        const locals = {
+            uid: event.params.uid,
+            senderEmail: document['sender_email'],
+            receiverEmail: document['receiver_email']
         };
 
-        mailOptions['subject'] = 'Subject';
-        mailOptions['text'] = `
-            ${senderEmail} has content to share with you.
+        const email = new Email({
+            message: {
+                from: noreply
+            },
+            transport: mailTransport,
+            views: {
+                options: {
+                    extension: 'handlebars'
+                }
+            }
+        });
 
-            Click http://localhost:3000/#/view_share/${uid} to view.
+        console.info('Email created');
 
-            Please Note. This content will expire in 48 hours. Afterwards, the content will no longer be viewable.
-        `;
+        email.send({
+            template: 'receiver',
+            message: {
+                to: document['receiver_email']
+            },
+            locals: locals
+        }).then(() => {
+            console.info('Email Sent');
+        }).catch((error) => {
+            console.error('Error Sending Email', error.message);
+        });
 
-        return mailTransport.sendMail(mailOptions)
-            .then(function () {
-                console.info('Email sent.');
-            })
-            .catch(function (error) {
-                console.error('There was an error while sending email.', error.message);
-            })
-        ;
+        return true;
     });
-

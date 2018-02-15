@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFirestoreCollection, QueryFn, DocumentChangeAction } from 'angularfire2/firestore';
+
+import { Observable } from 'rxjs';
 
 import { FirestoreService } from '../shared/services/firestore.service';
 
@@ -25,6 +27,12 @@ export class ShareService
 
     getSharePromise(docId: string) : Promise<any>{
         return this.firestoreSvc.getDocumentSnapshot(this.shareColl, docId);
+    }
+
+    getShareByToken(token: string) : Observable<DocumentChangeAction[]> {
+        return this.firestoreSvc.getCollection(COLL_SHARE, (ref) => {
+            return ref.where('token', '==', token);
+        }).snapshotChanges();
     }
 
     setShare(docId: string, data: any) {

@@ -20,9 +20,9 @@ exports.sendCreateEmail = functions.firestore
         const noreply = `${APP_NAME} <noreply@one.time.share.com>`;
         const document = event.data.data();
         const locals = {
-            docId: event.params.docId,
             senderEmail: document['sender_email'],
-            receiverEmail: document['receiver_email']
+            receiverEmail: document['receiver_email'],
+            url: document['url']
         };
 
         const email = new Email({

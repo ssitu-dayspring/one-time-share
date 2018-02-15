@@ -26,14 +26,19 @@ export class ViewShareComponent
 
     ngOnInit() {
         this.activatedRouter.params.subscribe(params => {
-            this.docId = params['id'];
+            let token = params['token'];
 
-            this.shareSvc.getSharePromise(this.docId).then((doc) => {
-                this.share = (doc.exists)
-                    ? doc.data()
-                    : null;
+            this.shareSvc.getShareByToken(token).subscribe((snapshots: any) => {
+                if (snapshots.length > 0) {
+                    let data = snapshots[0].payload.doc;
 
-                if (this.share && this.share.content && this.share.is_active) {
+                    if (data.exists) {
+                        this.docId = data.id;
+                        this.share = data.data();
+                    }
+                }
+
+                if (this.share) {
                     this.setShareAsViewed();
                 } else {
                     this.router.navigateByUrl('expired');
@@ -45,7 +50,7 @@ export class ViewShareComponent
     setShareAsViewed() {
         let data = {
             content: '',
-            is_active: false,
+            token: '',
             date_modified: serverTimestamp
         };
 

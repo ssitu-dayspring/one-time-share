@@ -11,7 +11,7 @@ import { ExpiredComponent }    from './expired.component';
         { path: '', redirectTo: '/form', pathMatch: 'full' },
         { path: 'form', component: ShareFormComponent },
         { path: 'confirmation', component: ConfirmationComponent },
-        { path: 'view_share/:id', component: ViewShareComponent },
+        { path: 'view_share/:token', component: ViewShareComponent },
         { path: 'expired', component: ExpiredComponent }
     ])],
     exports: [RouterModule]

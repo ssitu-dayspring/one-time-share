@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
+import { PlatformLocation } from '@angular/common';
 
 import { ShareFormService } from '../../services/share.form';
 
@@ -20,7 +21,8 @@ export class ShareFormComponent
 
     constructor(
         private router: Router,
-        private shareFormSvc: ShareFormService
+        private shareFormSvc: ShareFormService,
+        private platformLocation: PlatformLocation
     ) {}
 
     ngOnInit() {
@@ -46,7 +48,9 @@ export class ShareFormComponent
     }
 
     onSubmit() {
-        this.shareFormSvc.submit();
+        let token = ((Math.random() + 1) * (new Date()).getTime()).toString(36).replace(".", "").substr(0, 10);
+        let url = (this.platformLocation as any).location.origin + "/#/view_share/" + token;
+        this.shareFormSvc.submit(token, url);
 
         if (this.form.valid) {
             this.router.navigateByUrl('/confirmation');

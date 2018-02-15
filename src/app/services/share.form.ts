@@ -38,7 +38,7 @@ export class ShareFormService
         return this.form;
     }
 
-    submit() {
+    submit(uniqueToken: string, url: string) {
         let formData = this.form.getRawValue();
         let share: Share = {
             sender_email: formData.senderEmail,
@@ -46,7 +46,8 @@ export class ShareFormService
             content: formData.content,
             date_created: serverTimestamp,
             date_modified: null,
-            is_active: true
+            token: uniqueToken,
+            url: url
         };
 
         this.validate(this.form);

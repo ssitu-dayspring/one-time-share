@@ -9,5 +9,6 @@ export interface Share
     content: string;
     date_created: FieldValue;
     date_modified: FieldValue;
-    is_active: boolean;
+    token: string;
+    url: string;
 }

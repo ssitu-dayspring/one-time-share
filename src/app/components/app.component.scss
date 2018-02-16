@@ -1,0 +1,43 @@
+main {
+    display: flex;
+
+    .header {
+        padding: 100px 100px 100px 35px;
+
+        h2 {
+            margin-top: 35px;
+            font-size: 25px;
+        }
+
+        h3 {
+            margin-top: 50px;
+        }
+    }
+
+    .container {
+        margin: 0;
+        padding: 25px 100px 200px;
+        background: #ebd8cd;
+        min-height: 80vh;
+
+        .jumbotron {
+            background: none;
+
+
+          label {
+            color: red;
+          }
+        }
+    }
+}
+
+.footer {
+    padding: 50px 200px;
+    width: 100%;
+    background: #b97a57;
+    color: #fff;
+
+    a, a:visited {
+        color: #fff;
+    }
+}

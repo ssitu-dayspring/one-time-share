@@ -1,5 +1,17 @@
-<h2>Share Form</h2>
+<div class="info">
+    <p>
+        Fill out the form below to share content with a person. The recipient will receive an email directing them to
+        Share with the shared content.
+    </p>
 
+    <p>
+        Shared content will expire whenever the Share content <strong>has been viewed</strong>, or
+        <strong>48 hours after</strong> it was created. If the content has been missed, simply submit a new form with
+        the same content to your recipient.
+    </p>
+</div>
+
+<h1>SHARE</h1>
 <form novalidate (ngSubmit)="onSubmit()" [formGroup]="form">
     <div class="form-group">
         <form-row [validations]="validationsAll?.senderEmail" [formCtrlName]="'senderEmail'">

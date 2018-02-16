@@ -47,7 +47,8 @@ export class ShareFormService
             date_created: serverTimestamp,
             date_modified: null,
             token: uniqueToken,
-            url: url
+            url: url,
+            is_active: true
         };
 
         this.validate(this.form);

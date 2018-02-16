@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestoreCollection, QueryFn, DocumentChangeAction } from 'angularfire2/firestore';
-
 import { Observable } from 'rxjs';
+
+import * as moment from 'moment';
 
 import { FirestoreService } from '../shared/services/firestore.service';
 
@@ -32,6 +33,14 @@ export class ShareService
     getShareByToken(token: string) : Observable<DocumentChangeAction[]> {
         return this.firestoreSvc.getCollection(COLL_SHARE, (ref) => {
             return ref.where('token', '==', token);
+        }).snapshotChanges();
+    }
+
+    getExpiringShares() : Observable<DocumentChangeAction[]> {
+        return this.firestoreSvc.getCollection(COLL_SHARE, (ref) => {
+            return ref
+                .where('date_created', '<=', moment().subtract(48, 'hours').toDate())
+                .where('is_active', '==', true);
         }).snapshotChanges();
     }
 

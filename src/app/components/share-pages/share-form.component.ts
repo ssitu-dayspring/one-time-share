@@ -6,6 +6,9 @@ import { Observable } from 'rxjs/Observable';
 import { PlatformLocation } from '@angular/common';
 
 import { ShareFormService } from '../../services/share.form';
+import { ShareService } from '../../services/share.service';
+
+import { BaseAbstractShare } from './shared/base-abstract-share';
 
 @Component({
     selector: 'share-form',
@@ -13,7 +16,7 @@ import { ShareFormService } from '../../services/share.form';
     styles: [require('./share-form.component.scss')]
 })
 
-export class ShareFormComponent
+export class ShareFormComponent extends BaseAbstractShare
 {
     form: FormGroup;
 
@@ -22,8 +25,11 @@ export class ShareFormComponent
     constructor(
         private router: Router,
         private shareFormSvc: ShareFormService,
-        private platformLocation: PlatformLocation
-    ) {}
+        private platformLocation: PlatformLocation,
+        protected shareSvc: ShareService
+    ) {
+        super(shareSvc);
+    }
 
     ngOnInit() {
         this.form = this.shareFormSvc.getForm();

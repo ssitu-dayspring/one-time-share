@@ -1,25 +1,4 @@
-$color-error: #dc3545;
 $color-box-outer: #b97a57;
-
-.form-control {
-    -webkit-border-radius: 0.15em;
-    -moz-border-radius: 0.15em;
-    border-radius: 0.15em;
-    border: none;
-}
-
-textarea {
-    resize: vertical;
-    min-height: 100px;
-}
-
-label, h1 {
-    color: $color-box-outer;
-}
-
-hr {
-    border-top-color: $color-box-outer;
-}
 
 .info {
     padding: 20px 25px 5px;
@@ -29,20 +8,6 @@ hr {
     -webkit-border-radius: 0.15em;
     -moz-border-radius: 0.15em;
     border-radius: 0.15em;
-}
-
-.has-error {
-    label {
-       color: $color-error;
-    }
-
-    input, textarea {
-        border-color: $color-error;
-    }
-
-    .error li {
-        color: $color-error;
-    }
 }
 
 .btn.btn-primary {

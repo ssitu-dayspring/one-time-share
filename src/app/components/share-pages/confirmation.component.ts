@@ -4,7 +4,8 @@ import { ShareFormService } from '../../services/share.form';
 
 @Component({
     selector: 'confirmation',
-    template: require('./confirmation.component.html')
+    template: require('./confirmation.component.html'),
+    styles: [require('./confirmation.component.scss')]
 })
 
 export class ConfirmationComponent

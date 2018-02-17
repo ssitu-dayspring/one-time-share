@@ -1,8 +1,17 @@
-<h2>View Share</h2>
+<div class="info">
+    <h2>View Share</h2>
 
-<p>Content shared from <strong>{{ share?.sender_email }}</strong></p>
+    <p>
+        Content will expire after leaving the page. Make sure to copy it or mark it down somewhere before leaving
+        the page.
+    </p>
+</div>
 
-<p class="form-control">{{ share?.content }}</p>
+<div id="shared-content">
+    <label>Content shared by: <strong>{{ share?.sender_email }}</strong></label>
+    <div class="form-control">{{ share?.content }}</div>
+</div>
+
 
 <a class="btn btn-primary"
-   routerLink="/form">Create Another Share</a>
+   routerLink="/form">Create A Share</a>

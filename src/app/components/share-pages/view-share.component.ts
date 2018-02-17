@@ -12,7 +12,8 @@ import * as moment from 'moment';
 
 @Component({
     selector: 'view-share',
-    template: require('./view-share.component.html')
+    template: require('./view-share.component.html'),
+    styles: [require('./view-share.component.scss')]
 })
 
 export class ViewShareComponent extends BaseAbstractShare

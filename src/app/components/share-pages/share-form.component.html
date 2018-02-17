@@ -15,7 +15,7 @@
 <form novalidate (ngSubmit)="onSubmit()" [formGroup]="form">
     <div class="form-group">
         <form-row [validations]="validationsAll?.senderEmail" [formCtrlName]="'senderEmail'">
-            <label class="form-control-label" form-section="label"><strong>Sender Email</strong></label>
+            <label class="form-control-label" form-section="label"><strong>Your Email</strong></label>
 
             <input class="form-control"
                    type="text"
@@ -45,6 +45,8 @@
                    formControlName="receiverEmail">
         </form-row>
     </div>
+
+    <hr>
 
     <button type="submit"
             class="btn btn-primary"

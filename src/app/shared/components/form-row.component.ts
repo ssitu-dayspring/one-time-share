@@ -20,7 +20,8 @@ export interface Validation {
                 </ul>
             </div>
         </div>
-    `
+    `,
+    styles: [require('./form-row.component.scss')]
 })
 
 export class FormRowComponent

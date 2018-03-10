@@ -1,20 +1,18 @@
-const functions  = require('firebase-functions');
-const nodemailer = require('nodemailer');
-const Email      = require('email-templates');
+import * as functions from 'firebase-functions';
+import * as nodemailer from 'nodemailer';
+import * as EmailTemplate from 'email-templates';
 
-const gmailEmail    = functions.config().gmail.email;
-const gmailPassword = functions.config().gmail.password;
 const mailTransport = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: gmailEmail,
-        pass: gmailPassword
+        user: functions.config().gmail.email,
+        pass: functions.config().gmail.password
     }
 });
 
 const APP_NAME = '[DEV] One Time Share';
 
-exports.sendCreateEmail = functions.firestore
+export const sendShareCreatedEmail = functions.firestore
     .document('share/{docId}')
     .onCreate((event) => {
         const noreply = `${APP_NAME} <noreply@one.time.share.com>`;
@@ -25,7 +23,7 @@ exports.sendCreateEmail = functions.firestore
             url: document['url']
         };
 
-        const email = new Email({
+        const email = new EmailTemplate({
             message: {
                 from: noreply
             },
@@ -40,14 +38,14 @@ exports.sendCreateEmail = functions.firestore
         console.info('Email created');
 
         email.send({
-            template: 'receiver',
+            template: 'share-invitation',
             message: {
                 to: document['receiver_email']
             },
             locals: locals
         }).then(() => {
             console.info('Email Sent');
-        }).catch((error) => {
+        }).catch((error: any) => {
             console.error('Error Sending Email', error.message);
         });
 

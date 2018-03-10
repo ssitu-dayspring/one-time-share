@@ -1,0 +1,15 @@
+$color-error: #dc3545;
+
+.has-error {
+    label {
+        color: $color-error;
+    }
+
+    input, textarea {
+        border: 1px solid $color-error;
+    }
+
+    .error li {
+        color: $color-error;
+    }
+}

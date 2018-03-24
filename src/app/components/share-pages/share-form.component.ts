@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
-import { AngularFirestore } from 'angularfire2/firestore';
-import { Observable } from 'rxjs/Observable';
 import { PlatformLocation } from '@angular/common';
 
 import { ShareFormService } from '../../services/share.form';
-import { ShareService } from '../../services/share.service';
+import { ShareExpirerService } from '../../services/share-expirer.service';
 
 import { BaseAbstractShare } from './shared/base-abstract-share';
 
@@ -26,9 +24,9 @@ export class ShareFormComponent extends BaseAbstractShare
         private router: Router,
         private shareFormSvc: ShareFormService,
         private platformLocation: PlatformLocation,
-        protected shareSvc: ShareService
+        protected shareExpirerSvc: ShareExpirerService
     ) {
-        super(shareSvc);
+        super(shareExpirerSvc);
     }
 
     ngOnInit() {

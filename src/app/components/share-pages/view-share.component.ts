@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { serverTimestamp } from '../../shared/services/firestore.service';
 import { ShareService } from '../../services/share.service';
+import { ShareExpirerService } from '../../services/share-expirer.service';
 
 import { Share } from '../../model/share';
 
@@ -24,9 +25,10 @@ export class ViewShareComponent extends BaseAbstractShare
     constructor(
         private activatedRouter: ActivatedRoute,
         private router: Router,
-        protected shareSvc: ShareService
+        private shareSvc: ShareService,
+        protected shareExpirerSvc: ShareExpirerService
     ) {
-        super(shareSvc);
+        super(shareExpirerSvc);
 
         this.share = null;
     }

@@ -6,7 +6,6 @@ import * as firebase from 'firebase/app';
 import { Share } from '../model/share';
 
 import { ShareService } from './share.service';
-import { serverTimestamp } from '../shared/services/firestore.service';
 
 import { isaRfcEmail } from '../form-validators/index';
 
@@ -44,7 +43,7 @@ export class ShareFormService
             sender_email: formData.senderEmail,
             receiver_email: formData.receiverEmail,
             content: formData.content,
-            date_created: serverTimestamp,
+            date_created: this.shareSvc.getServerTimestamp(),
             date_modified: null,
             token: uniqueToken,
             url: url,

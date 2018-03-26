@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { serverTimestamp } from '../../shared/services/firestore.service';
 import { ShareService } from '../../services/share.service';
 import { ShareExpirerService } from '../../services/share-expirer.service';
 
@@ -38,13 +37,13 @@ export class ViewShareComponent extends BaseAbstractShare
             let token = params['token'];
             let isShareValid = false;
 
-            this.shareSvc.getShareByToken(token).subscribe((snapshots: any[]) => {
+            this.shareSvc.getSharesWithMetadataByToken(token).subscribe((snapshots: any[]) => {
                 if (snapshots.length > 0) {
-                    let data = snapshots[0].payload.doc;
+                    let shareSnapshot = snapshots[0].payload.doc;
 
-                    if (data.exists) {
-                        this.docId = data.id;
-                        this.share = data.data();
+                    if (shareSnapshot.exists) {
+                        this.docId = shareSnapshot.id;
+                        this.share = shareSnapshot.data();
 
                         isShareValid = this.share
                             && moment(this.share.date_created) > moment().subtract(48, 'hours');
@@ -65,9 +64,9 @@ export class ViewShareComponent extends BaseAbstractShare
             content: '',
             token: '',
             is_active: false,
-            date_modified: serverTimestamp
+            date_modified: this.shareSvc.getServerTimestamp()
         };
 
-        this.shareSvc.setShare(this.docId, data);
+        this.shareSvc.updateShare(this.docId, data);
     }
 }

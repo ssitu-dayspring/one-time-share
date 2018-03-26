@@ -14,7 +14,6 @@ import { ViewShareComponent } from './view-share.component';
 import { ExpiredComponent } from './expired.component';
 import { FormRowComponent } from '../../shared/components/form-row.component';
 
-import { FirestoreService } from '../../shared/services/firestore.service';
 import { ShareService } from '../../services/share.service';
 import { ShareExpirerService } from '../../services/share-expirer.service';
 import { ShareFormService } from '../../services/share.form';
@@ -46,7 +45,6 @@ import { environment } from '../../environments/firebase.environment';
     bootstrap: [ShareFormComponent],
     providers: [
         LOG_LOGGER_PROVIDERS,
-        FirestoreService,
         ShareService,
         ShareExpirerService,
         ShareFormService

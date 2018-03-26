@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestoreCollection, QueryFn, DocumentChangeAction } from 'angularfire2/firestore';
+import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 
 import { FirestoreService } from '../shared/services/firestore.service';
@@ -10,35 +10,37 @@ import { Share } from '../model/share';
 const COLL_SHARE = 'share';
 
 @Injectable()
-export class ShareService
+export class ShareService extends FirestoreService
 {
-    private shareColl: AngularFirestoreCollection<Share>;
-
     constructor(
-        private firestoreSvc: FirestoreService) {
+        protected db: AngularFirestore) {
 
-        this.shareColl = firestoreSvc.getCollection(COLL_SHARE);
+        super(db);
+    }
+
+    protected getCollectionName() {
+        return COLL_SHARE;
     }
 
     createShare(share: Share) {
-        this.firestoreSvc.create(this.shareColl, share);
+        this.create(share);
     }
 
     getSharePromise(docId: string) : Promise<any>{
-        return this.firestoreSvc.getDocumentSnapshot(this.shareColl, docId);
+        return this.getDocumentSnapshot(docId);
     }
 
-    getShareByToken(token: string) : Observable<DocumentChangeAction[]> {
-        return this.firestoreSvc.getCollection(COLL_SHARE, (ref) => {
+    getSharesWithMetadataByToken(token: string) : Observable<any[]> {
+        return this.getDocumentsWithMetadata((ref) => {
             return ref.where('token', '==', token);
-        }).snapshotChanges();
+        });
     }
 
-    setShare(docId: string, data: any) {
-        this.firestoreSvc.update(this.shareColl, docId, data);
+    updateShare(docId: string, data: any) {
+        this.update(docId, data);
     }
 
     deleteShare(docId: string) {
-        this.firestoreSvc.remove(this.shareColl, docId);
+        this.remove(docId);
     }
 }
